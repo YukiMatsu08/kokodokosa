@@ -1,0 +1,24 @@
+// 例：200個のデータがあるとして、その中のどれか（0〜199）の番号を一つ選ぶ
+let r = Math.floor(Math.random() * 200);
+
+// ① 200番目の中身を、仮の箱（temp）に避難させる
+let temp = quizData[199];
+
+// ② ランダムな相手（r番目）の中身を、200番目の場所に上書きする
+quizData[199] = quizData[r];
+
+// ③ 仮の箱にいた元の200番目の中身を、相手（r番目）の場所に上書きする
+quizData[r] = temp;
+
+let count = quizData.length - 1;
+
+for(let count = quizData.length - 1;count = 0;count--){
+    // ① 200番目の中身を、仮の箱（temp）に避難させる
+let temp = quizData[count];
+
+// ② ランダムな相手（r番目）の中身を、200番目の場所に上書きする
+quizData[count] = quizData[r];
+
+// ③ 仮の箱にいた元の200番目の中身を、相手（r番目）の場所に上書きする
+quizData[r] = temp;
+}

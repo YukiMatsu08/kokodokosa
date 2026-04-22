@@ -1,0 +1,113 @@
+#quiz-container {
+    display: flex;
+    gap: 30px;
+    max-width: 900px; /* 2カラム用に広げます */
+    margin: 20px auto;
+    padding: 30px;
+    border: 2px solid #007bc3; /* ここで色を「#007bc3」に指定 */
+    border-radius: 15px;
+    font-family: sans-serif;
+    background-color: #fff; /* 背景を白に固定 */
+}
+
+/* 2. 左カラム（メインエリア）の設定 */
+.quiz-main, .quiz-sub {
+    flex: 1;
+}
+
+#app-question {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+#quiz-image-area {
+    /* 以前の #quiz-tld の背景や枠線の設定を維持 */
+    background-color: #f9f9f9;
+    border: 2px solid #e0e4e8;
+    border-radius: 10px;
+    margin: 20px 0;
+    padding: 10px; /* 画像の周りに少し余白 */
+    min-height: 200px; /* 画像読み込み前のガタつき防止 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#quiz-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 3. 右カラム（サブエリア）の設定 */
+.quiz-sub {
+    display: flex;
+    flex-direction: column;
+}
+
+#quiz-msg {
+    text-align: center;
+    font-weight: bold;
+    margin: 10px 0;
+    min-height: 1.5rem;
+}
+
+#quiz-note {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+.choice-button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+    background-color: #fff;
+    border: 2px solid #007bc3;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/* 名前を quiz-question-container に変更 */
+#quiz-question-container {
+    background-color: #f0f8ff;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 250px; /* 少し高さを確保 */
+}
+
+#quiz-question-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+/* すべての画面を一旦非表示にする */
+.screen {
+    display: none;
+}
+
+/* active クラスがついている画面だけを表示する */
+/* display: block だと flex 設定が上書きされる場合があるため、
+   必要に応じて各コンテナ側でレイアウトを制御します */
+.screen.active {
+    display: block; 
+}
+
+#quiz-container.active {
+    display: flex; /* クイズ画面だけは 2カラムのために flex にする */
+}

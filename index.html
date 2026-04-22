@@ -1,0 +1,71 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kokodokosa - クイズアプリ</title>
+    
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .screen {
+            display: none !important;
+        }
+        .screen.active {
+            display: block !important;
+        }
+        /* クイズ画面だけはflexを維持して横並びにする */
+        #quiz-container.active {
+            display: flex !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="title-screen" class="screen active">
+        <h1>Kokodokosa</h1>
+        <div class="mode-select">
+            <button class="choice-button" onclick="showSetup('domain')">ドメインクイズ</button>
+            <button class="choice-button" onclick="showSetup('text')">文字クイズ</button>
+            <button class="choice-button" onclick="showSetup('sign')">標識クイズ</button>
+        </div>
+    </div>
+
+    <div id="setup-screen" class="screen">
+        <h2 id="setup-mode-name">ミッション準備</h2>
+        <div class="difficulty-select">
+            <p>難易度を選択してください</p>
+            <button class="choice-button" onclick="startQuiz('easy')">初級</button>
+            <button class="choice-button" onclick="startQuiz('normal')">中級</button>
+            <button class="choice-button" onclick="startQuiz('hard')">上級</button>
+        </div>
+        <button class="next-button" onclick="showTitle()">タイトルに戻る</button>
+    </div>
+
+    <div id="quiz-container" class="screen">
+        <div class="main-layout" style="display: flex; gap: 30px;"> <div class="quiz-main" style="flex: 1;"> <div id="app-question">この画像から国を特定せよ</div>
+                <div id="quiz-question-container"> <img id="quiz-question-image" src="">
+                </div>
+            </div>
+
+            <div class="quiz-sub" style="flex: 1;"> <div id="status-bar">
+                    <span id="current-mode-display">モード</span>
+                    <span id="player-lv">Lv.1</span>
+                    <span id="current-score" style="margin-left:auto;">正答: 0</span>
+                </div>
+
+                <div id="quiz-msg"></div>
+                <div id="quiz-note"></div>
+
+                <div class="button-grid">
+                    <button id="quiz-choice0" class="choice-button" onclick="checkAnswer(0)"></button>
+                    <button id="quiz-choice1" class="choice-button" onclick="checkAnswer(1)"></button>
+                    <button id="quiz-choice2" class="choice-button" onclick="checkAnswer(2)"></button>
+                    <button id="quiz-choice3" class="choice-button" onclick="checkAnswer(3)"></button>
+                </div>
+                <button id="next-button" class="next-button" onclick="loadQuestion()" style="display:none;">次の問題へ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
