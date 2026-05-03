@@ -23,43 +23,51 @@
 
 <body>
     <div id="title-screen" class="screen active">
-        <h1>Kokodokosa</h1>
-        <!-- index.html: ジャンル選択ボタンのみ書き換えてください -->
+        <div class="title-logo-area">
+            <!-- 地球とタイトルを横に並べるためのラッパー -->
+            <div class="title-flex-wrapper">
+                <span class="earth-icon">🌍</span>
+                <h1 class="main-title-katakana">ココドコサー</h1>
+            </div>
+            <p class="sub-title-english">~ WORLD EXPLORER ~</p>
+        </div>
+
+        <!-- 2. ジャンル選択エリア（2列グリッド） -->
         <div class="mode-selection-container">
 
             <!-- ドメイン -->
-            <div class="mode-row">
-                <div class="mode-label">ドメイン</div>
+            <div class="mode-row domain">
+                <div class="mode-label">🌐 ドメイン</div>
                 <div class="mode-buttons">
-                    <button class="choice-button mini" onclick="startQuiz('domain', 10)">10問 (サクッと)</button>
-                    <button class="choice-button" onclick="startQuiz('domain', 0)">全問 (集中)</button>
+                    <button class="choice-button mini" onclick="startQuiz('domain', 10)">10問</button>
+                    <button class="choice-button" onclick="startQuiz('domain', 0)">全問</button>
                 </div>
             </div>
 
             <!-- 文字 -->
-            <div class="mode-row">
-                <div class="mode-label">文字</div>
+            <div class="mode-row text">
+                <div class="mode-label">🔤 文字</div>
                 <div class="mode-buttons">
-                    <button class="choice-button mini" onclick="startQuiz('text', 10)">10問 (サクッと)</button>
-                    <button class="choice-button" onclick="startQuiz('text', 0)">全問 (集中)</button>
+                    <button class="choice-button mini" onclick="startQuiz('text', 10)">10問</button>
+                    <button class="choice-button" onclick="startQuiz('text', 0)">全問</button>
                 </div>
             </div>
 
-            <!-- 標識：一時停止 -->
-            <div class="mode-row">
-                <div class="mode-label">一時停止</div>
+            <!-- 一時停止 -->
+            <div class="mode-row stop">
+                <div class="mode-label">🛑 一時停止</div>
                 <div class="mode-buttons">
-                    <button class="choice-button mini" onclick="startQuiz('sign-stop', 10)">10問 (サクッと)</button>
-                    <button class="choice-button" onclick="startQuiz('sign-stop', 0)">全問 (集中)</button>
+                    <button class="choice-button mini" onclick="startQuiz('sign-stop', 10)">10問</button>
+                    <button class="choice-button" onclick="startQuiz('sign-stop', 0)">全問</button>
                 </div>
             </div>
 
-            <!-- 標識：横断歩道 -->
-            <div class="mode-row">
-                <div class="mode-label">横断歩道</div>
+            <!-- 横断歩道 -->
+            <div class="mode-row crossing">
+                <div class="mode-label">🚶 横断歩道</div>
                 <div class="mode-buttons">
-                    <button class="choice-button mini" onclick="startQuiz('sign-crossing', 10)">10問 (サクッと)</button>
-                    <button class="choice-button" onclick="startQuiz('sign-crossing', 0)">全問 (集中)</button>
+                    <button class="choice-button mini" onclick="startQuiz('sign-crossing', 10)">10問</button>
+                    <button class="choice-button" onclick="startQuiz('sign-crossing', 0)">全問</button>
                 </div>
             </div>
 
@@ -77,8 +85,8 @@
         <button class="next-button" onclick="showTitle()">タイトルに戻る</button>
     </div>
 
+    <!-- quiz-container の中身を以下のように書き換え -->
     <div id="quiz-container" class="screen">
-        <!-- インラインスタイルを削除し、クラスで制御 -->
         <div class="main-layout">
             <div class="quiz-main">
                 <div id="app-question">この画像から国を特定せよ</div>
@@ -88,27 +96,28 @@
             </div>
 
             <div class="quiz-sub">
-                <!-- 1. ステータス -->
-                <div id="status-bar">
-                    <span id="current-mode-display">モード</span>
-                    <span id="player-lv">Lv.1</span>
-                    <span id="current-score">正答: 0</span>
+                <!-- ボタンを追加したステータスバー -->
+                <div id="status-bar" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span id="current-mode-display" style="font-size: 0.9rem;">モード</span>
+                        <span id="current-score" style="margin-left: 10px; color: #007bc3;">正答: 0</span>
+                    </div>
+
+                    <div class="quiz-controls">
+                        <button class="control-button btn-quit" onclick="quitAndResults()">やめる</button>
+                        <button class="control-button btn-back" onclick="location.reload()">タイトルへ</button>
+                    </div>
                 </div>
 
-                <!-- 2. 選択肢ボタン -->
+                <!-- 選択肢ボタンなど以降は変更なし -->
                 <div class="button-grid">
                     <button id="quiz-choice0" class="choice-button" onclick="checkAnswer(0)"></button>
                     <button id="quiz-choice1" class="choice-button" onclick="checkAnswer(1)"></button>
                     <button id="quiz-choice2" class="choice-button" onclick="checkAnswer(2)"></button>
                     <button id="quiz-choice3" class="choice-button" onclick="checkAnswer(3)"></button>
                 </div>
-
-                <!-- 3. 結果・解説エリア -->
                 <div id="quiz-msg"></div>
                 <div id="quiz-note"></div>
-
-                <button id="next-button" class="next-button" onclick="loadQuestion()"
-                    style="display:none;">次の問題へ</button>
             </div>
         </div>
     </div>

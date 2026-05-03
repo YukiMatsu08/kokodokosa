@@ -1,5 +1,5 @@
 /* =========================================
-   1. 画面全体の中央寄せ設定
+   1. 画面共通・切り替え設定
    ========================================= */
 
 #title-screen, #setup-screen, #result-screen {
@@ -12,21 +12,141 @@
     width: 100%;
 }
 
+.screen { display: none !important; }
+#quiz-container.active { display: block !important; } 
+.screen.active { display: flex !important; }
+
 /* =========================================
-   2. ボタンのデザイン（300px固定）
+   2. タイトル画面（ココドコサー）
+   ========================================= */
+
+   
+/* 1. 背景（海）の色を少し濃くしてコントラストを作る */
+#title-screen {
+    background-color: #d1e9ff; /* 少し濃い目の水色 */
+    background-image: linear-gradient(135deg, #e0f2f1 0%, #b3e5fc 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 40px 20px;
+}
+
+/* 2. 陸地（大陸）をより「白く・はっきり」させる */
+#title-screen::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80% auto;
+    
+    /* 1. 大陸を極限まで白く飛ばす設定 */
+    /* invertで反転し、brightnessで眩しい白にし、contrastで境界を固めます */
+    filter: invert(100%) brightness(500%) contrast(200%); 
+    
+    /* 2. 背景の水色に負けないように「覆い焼き」のような効果を出す */
+    mix-blend-mode: screen; 
+    
+    /* 3. 地図がはっきり見えるよう、不透明度を調整（0.15は結構濃いめです） */
+    opacity: 0.15; 
+    z-index: 0;
+}
+
+/* ロゴやボタンが地図に隠れないように前面に出す */
+.title-logo-area, .mode-selection-container {
+    position: relative;
+    z-index: 1;
+}
+/* ロゴエリア */
+.title-logo-area {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.main-title-katakana {
+    display: inline-block;
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: #007bc3;
+    transform: skewX(-15deg); 
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(0, 123, 195, 0.2);
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+}
+
+.sub-title-english {
+    font-size: 1rem;
+    color: #666;
+    font-weight: bold;
+    letter-spacing: 0.4em;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* ジャンル選択グリッド */
+.mode-selection-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 800px;
+    max-width: 95%;
+    margin: 0 auto;
+}
+
+/* ジャンルカード本体 */
+.mode-row {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0, 123, 195, 0.1);
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100% !important;
+    box-sizing: border-box;
+    border-left: 10px solid #ccc;
+    transition: transform 0.2s;
+}
+
+.mode-row:hover { transform: translateY(-5px); }
+
+/* アクセントカラー分け */
+.mode-row.domain { border-left-color: #3498db; }
+.mode-row.text { border-left-color: #9b59b6; }
+.mode-row.stop { border-left-color: #e74c3c; }
+.mode-row.crossing { border-left-color: #2ecc71; }
+
+.mode-label {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mode-buttons {
+    display: flex;
+    width: 100%;
+    gap: 12px;
+}
+
+/* =========================================
+   3. ボタン共通デザイン
    ========================================= */
 
 .choice-button {
     display: block;
-    width: 300px !important;
-    min-width: 300px;
-    margin: 10px auto;
-    padding: 15px;
     background-color: #fff;
     border: 2px solid #007bc3;
     border-radius: 30px;
     text-align: center;
-    font-size: 1.1rem;
     font-weight: bold;
     color: #007bc3;
     cursor: pointer;
@@ -34,59 +154,43 @@
     transition: all 0.2s ease;
 }
 
-/* 10問ボタン（mini）の色設定 */
-.choice-button.mini {
-    background-color: #eef7ff;
+/* タイトル画面カード内のボタン専用（フレキシブル） */
+.mode-row .choice-button {
+    flex: 1;
+    padding: 12px 0;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: 2px solid #eee;
+    background: #fdfdfd;
+    color: #555;
 }
 
-.choice-button:hover {
+/* タイトル画面のホバー演出 */
+.mode-row.domain .choice-button:hover { background: #3498db; color: #fff; border-color: #3498db; }
+.mode-row.text .choice-button:hover { background: #9b59b6; color: #fff; border-color: #9b59b6; }
+.mode-row.stop .choice-button:hover { background: #e74c3c; color: #fff; border-color: #e74c3c; }
+.mode-row.crossing .choice-button:hover { background: #2ecc71; color: #fff; border-color: #2ecc71; }
+
+/* クイズ実行画面・回答ボタン（300px固定） */
+#quiz-container .choice-button {
+    width: 300px !important;
+    min-width: 300px;
+    margin: 10px auto;
+    padding: 15px;
+    font-size: 1.1rem;
+}
+
+#quiz-container .choice-button:hover {
     background-color: #007bc3;
     color: #fff;
 }
 
 /* =========================================
-   3. モード選択セクション（タイトル画面）
-   ========================================= */
-
-.mode-selection-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    align-items: center;
-}
-
-.mode-row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 15px;
-    border-left: 8px solid #007bc3; 
-    width: 360px; 
-    box-sizing: border-box;
-}
-
-.mode-label {
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: #007bc3;
-}
-
-.mode-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-/* =========================================
-   4. クイズ実行画面レイアウト（修正点）
+   4. クイズ実行画面レイアウト
    ========================================= */
 
 #quiz-container {
-    max-width: 1000px; /* 横並びを安定させるため少し広げました */
+    max-width: 1000px;
     margin: 20px auto;
     padding: 20px;
     border: 2px solid #007bc3;
@@ -98,11 +202,10 @@
 .main-layout {
     display: flex;
     gap: 30px;
-    align-items: flex-start; /* 上揃えでガタつき防止 */
+    align-items: flex-start;
     width: 100%;
 }
 
-/* 左側：画像エリアを60%で固定 */
 .quiz-main {
     flex: 0 0 60%; 
     max-width: 60%;
@@ -116,14 +219,13 @@
     margin-bottom: 15px;
     font-size: 1.4rem;
     width: 100%;
-    white-space: nowrap;
 }
 
 #quiz-question-container {
     background-color: #f0f8ff;
     border-radius: 10px;
     width: 100%;
-    height: 450px; /* 少し高さを調整 */
+    height: 450px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -136,16 +238,17 @@
     object-fit: contain;
 }
 
-/* 右側：選択肢エリア。残り40%を自動で埋める */
 .quiz-sub {
     flex: 1;
-    min-width: 320px; /* 300pxのボタンが余裕を持って入る幅 */
+    min-width: 320px;
     display: flex;
     flex-direction: column;
 }
 
 #status-bar {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     margin-bottom: 15px;
     padding-bottom: 10px;
@@ -155,36 +258,128 @@
 }
 
 /* =========================================
-   5. その他・画面切り替え
+   5. クイズ制御ボタン（中断・戻る・正誤）
    ========================================= */
 
-.screen { display: none !important; }
-/* クイズコンテナが表示される際はFlexboxを維持[cite: 2] */
-#quiz-container.active { display: block !important; } 
-.screen.active { display: flex !important; }
-
-.next-button {
-    margin-top: 20px;
-    padding: 12px 24px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
+.quiz-controls {
+    display: flex;
+    gap: 8px;
 }
 
-/* スマホ対応：画面が狭いときは縦並びに切り替え */
+.control-button {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1.5px solid #ccc;
+    background-color: #fff;
+    color: #666;
+}
+
+.btn-quit { border-color: #ffc107; color: #856404; background-color: #fffbef; }
+.btn-quit:hover { background-color: #ffc107; color: #fff; }
+
+.btn-back { border-color: #adb5bd; color: #495057; background-color: #f8f9fa; }
+.btn-back:hover { background-color: #6c757d; color: #fff; }
+
+/* 正誤演出（巨大マーク） */
+#feedback-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 200px;
+    font-weight: bold;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.animate-correct { color: rgba(231, 76, 60, 0.8); animation: feedback-pop 0.8s ease-out forwards; }
+.animate-wrong { color: rgba(52, 152, 219, 0.8); animation: feedback-pop 0.8s ease-out forwards; }
+
+@keyframes feedback-pop {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1.0); opacity: 0; }
+}
+
+/* =========================================
+   6. レスポンシブ対応
+   ========================================= */
+
 @media (max-width: 850px) {
-    .main-layout {
-        flex-direction: column;
-        align-items: center;
-    }
-    .quiz-main, .quiz-sub {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-    #quiz-question-container {
-        height: 300px;
-    }
+    .main-layout { flex-direction: column; align-items: center; }
+    .quiz-main, .quiz-sub { flex: 0 0 100%; max-width: 100%; }
+    #quiz-question-container { height: 300px; }
+    .mode-selection-container { grid-template-columns: 1fr; }
+}
+
+/* =========================================
+   9. タイトルロゴ横の地球アイコン
+   ========================================= */
+
+.title-logo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ロゴの親要素を調整して地球とタイトルを並べる */
+.title-logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.earth-icon {
+    font-size: 4rem; /* ロゴの高さに合わせる */
+    display: inline-block;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+    animation: earth-bounce 2s infinite ease-in-out;
+    transform-origin: center;
+}
+
+/* 地球がひょこひょこ動くアニメーション */
+@keyframes earth-bounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(10deg); }
+}
+
+/* タイトルとアイコンを横並びにするためのHTML微調整が必要な場合 */
+/* (h1とspanを一つのdivで囲むとより綺麗に並びます) */
+
+/* ロゴエリア全体の調整 */
+.title-logo-area {
+    display: flex;
+    flex-direction: column; /* サブタイトルだけは下に置く */
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+/* 地球とタイトルを横に並べる */
+.title-flex-wrapper {
+    display: flex;
+    flex-direction: row; /* 横並びにする */
+    align-items: center; /* 上下中央揃え */
+    gap: 15px; /* 地球と文字の間隔 */
+}
+
+/* 地球アイコンのサイズ微調整 */
+.earth-icon {
+    font-size: 4.5rem; /* タイトルの大きさに合わせる */
+    display: inline-block;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+    /* 斜身体に合わせて少し傾けてもスタイリッシュです */
+    transform: rotate(-10deg); 
+}
+
+/* カタカナタイトル側の余計なマージンを消す */
+.main-title-katakana {
+    margin: 0;
+    /* transform: skewX(-15deg); は既存の設定を維持 */
 }

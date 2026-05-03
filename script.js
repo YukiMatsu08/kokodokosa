@@ -4,15 +4,21 @@ let currentQuestionIndex = 0;
 let score = 0;
 let currentMode = '';
 
-// ① クイズ開始（引数に limit を追加）
+/**
+ * クイズ開始（タイトル画面から直接呼ばれる）
+ * @param {string} genre - 'domain', 'text' など
+ * @param {number} limit - 10 または 0 (全問)
+ */
 function startQuiz(genre, limit) {
     currentMode = genre;
     
     // 指定されたカテゴリーのみ抽出[cite: 3]
     let filteredData = quizData.filter(item => item.category === genre);
 
-    // シャッフルと抽出処理
+    // シャッフル[cite: 4]
     filteredData.sort(() => Math.random() - 0.5);
+
+    // 問題数の制限（limitが0より大きい場合のみ切り出し）[cite: 4]
     currentQuizData = limit > 0 ? filteredData.slice(0, limit) : filteredData;
 
     if (currentQuizData.length === 0) {
@@ -20,21 +26,21 @@ function startQuiz(genre, limit) {
         return;
     }
 
-    // モード表示名のマッピング
+    // モード表示名の設定
     const modeNames = { 
         'domain': 'ドメイン', 
         'text': '文字', 
         'sign-stop': '一時停止', 
         'sign-crossing': '横断歩道' 
     };
-    
     const limitLabel = limit > 0 ? `(${limit}問)` : "(全問)";
     document.getElementById('current-mode-display').textContent = `${modeNames[genre]} ${limitLabel}`;
 
-    // 画面の切り替えとクイズ開始[cite: 1]
+    // 画面の切り替え（クイズ画面へ直行）[cite: 1, 4]
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById('quiz-container').classList.add('active');
 
+    // 初期化して開始
     currentQuestionIndex = 0;
     score = 0;
     document.getElementById('current-score').textContent = `正答: ${score}`;
@@ -71,6 +77,21 @@ function loadQuestion() {
         btn.textContent = shuffledChoices[i]; // シャッフル後の配列を使用
         btn.disabled = false;
         btn.className = 'choice-button';
+    }
+}
+
+function quitAndResults() {
+    if (confirm("そこまでの成績で結果を表示しますか？")) {
+        // currentQuizData を現在解いた問題までに切り取って結果表示へ送る
+        // currentQuestionIndex が現在取り組んでいる問題の番号
+        currentQuizData = currentQuizData.slice(0, currentQuestionIndex);
+        
+        // 1問も解いていない場合はタイトルへリロード
+        if (currentQuizData.length === 0) {
+            location.reload();
+        } else {
+            showResult();
+        }
     }
 }
 

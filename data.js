@@ -1,264 +1,66 @@
 const quizData = [
-// --- ドメインクイズ (domain) ---
-    { tld: ".it", image: "images/domain/domain_Italy.png", answer: "イタリア", choices: ["イタリア", "フランス", "スペイン", "ギリシャ"], note: "Italyの略。地中海沿いの街並みが特徴的です。[cite: 1]", category: "domain", difficulty_label: "easy" },
-    { tld: ".jp", image: "images/domain/domain_Japan.png", answer: "日本", choices: ["日本", "韓国", "台湾", "中国"], note: "Japanの略。道路標識や左側通行が大きなヒントです。[cite: 1]", category: "domain", difficulty_label: "easy" },
-    { tld: ".kr", image: "images/domain/domain_SouthKorea.png", answer: "韓国", choices: ["韓国", "日本", "中国", "台湾"], note: "Koreaの略。ハングルの看板で見分けがつきます。[cite: 1]", category: "domain", difficulty_label: "easy" },
-    { tld: ".mk", image: "images/domain/domain_NorthMacedonia.png", answer: "北マケドニア", choices: ["北マケドニア", "ギリシャ", "アルバニア", "ブルガリア"], note: "Macedoniaの略です。", category: "domain", difficulty_label: "hard" },
-    { tld: ".mx", image: "images/domain/domain_Mexico.png", answer: "メキシコ", choices: ["メキシコ", "スペイン", "コロンビア", "アメリカ"], note: "Mexicoの略。特有の植生や乾燥した風景が特徴です。", category: "domain", difficulty_label: "normal" },
-    { tld: ".nz", image: "images/domain/domain_NewZealand.png", answer: "ニュージーランド", choices: ["ニュージーランド", "オーストラリア", "イギリス", "カナダ"], note: "New Zealandの略。黄色いセンターラインがないことが多いです。", category: "domain", difficulty_label: "normal" },
-    { tld: ".ru", image: "images/domain/domain_Russia.png", answer: "ロシア", choices: ["ロシア", "ウクライナ", "ポーランド", "カザフスタン"], note: "Russiaの略。キリル文字の看板が目印です。", category: "domain", difficulty_label: "normal" },
-    { tld: ".sg", image: "images/domain/domain_Singapore.png", answer: "シンガポール", choices: ["シンガポール", "マレーシア", "香港", "タイ"], note: "Singaporeの略。非常に整備された都市風景が特徴です。[cite: 1]", category: "domain", difficulty_label: "easy" },
-    { tld: ".tw", image: "images/domain/domain_Taiwan.png", answer: "台湾", choices: ["台湾", "中国", "日本", "タイ"], note: "Taiwanの略。繁体字の看板とバイクの多さがヒントです。[cite: 1]", category: "domain", difficulty_label: "easy" },
-    { tld: ".uk", image: "images/domain/domain_UnitedKingdom.png", answer: "イギリス", choices: ["イギリス", "アイルランド", "オーストラリア", "アメリカ"], note: "United Kingdomの略。車のナンバープレート（後部が黄色）が特徴です。", category: "domain", difficulty_label: "normal" },
-    { tld: ".vn", image: "images/domain/domain_Vietnam.png", answer: "ベトナム", choices: ["ベトナム", "タイ", "カンボジア", "ラオス"], note: "Vietnamの略。独特の形をした家の造りが特徴です。", category: "domain", difficulty_label: "normal" },
-    { tld: ".za", image: "images/domain/domain_SouthAfrica.png", answer: "南アフリカ", choices: ["南アフリカ", "イギリス", "オーストラリア", "ナイジェリア"], note: "Zuid-Afrika（オランダ語由来）の略。外側が白い道路の区画線が特徴です。", category: "domain", difficulty_label: "normal" },
-    { tld: ".ar", image: "images/domain/domain_Argentina.png", answer: "アルゼンチン", choices: ["アルゼンチン", "チリ", "ウルグアイ", "スペイン"], note: "Argentinaの略。標識の裏が黒いことが多いです。", category: "domain", difficulty_label: "normal" },
-    { tld: ".au", image: "images/domain/domain_Australia.png", answer: "オーストラリア", choices: ["オーストラリア", "ニュージーランド", "南アフリカ", "アメリカ"], note: "Australiaの略。非常に長い直線道路やユーカリの木が特徴です。", category: "domain", difficulty_label: "normal" },
-    { tld: ".be", image: "images/domain/domain_Belgium.png", answer: "ベルギー", choices: ["ベルギー", "フランス", "オランダ", "ドイツ"], note: "Belgiumの略。街灯の形が独特なことが多いです。", category: "domain", difficulty_label: "normal" },
-    { tld: ".br", image: "images/domain/domain_Brazil.png", answer: "ブラジル", choices: ["ブラジル", "ポルトガル", "アルゼンチン", "コロンビア"], note: "Brazilの略。標識の裏が黒く、背面に「×」の補強があることが特徴です。", category: "domain", difficulty_label: "normal" },
-    { tld: ".ca", image: "images/domain/domain_Canada.png", answer: "カナダ", choices: ["カナダ", "アメリカ", "イギリス", "フランス"], note: "Canadaの略。アメリカに似ていますが、速度制限がkm/h表記です。", category: "domain", difficulty_label: "normal" },
-    { tld: ".ch", image: "images/domain/domain_Switzerland.png", answer: "スイス", choices: ["スイス", "ドイツ", "オーストリア", "イタリア"], note: "Confoederatio Helvetica（ラテン語）の略。低い位置にある標識が特徴です。", category: "domain", difficulty_label: "normal" },
-    { tld: ".co", image: "images/domain/domain_Colombia.png", answer: "コロンビア", choices: ["コロンビア", "ベネズエラ", "メキシコ", "エクアドル"], note: "Colombiaの略。黄色いナンバープレートが大きな目印になります。", category: "domain", difficulty_label: "normal" },
-    { tld: ".de", image: "images/domain/domain_Germany.png", answer: "ドイツ", choices: ["ドイツ", "オーストリア", "スイス", "オランダ"], note: "Deutschlandの略。プライバシー保護のため、一部地域以外はぼかしが多いです。", category: "domain", difficulty_label: "normal" },
-    { tld: ".es", image: "images/domain/domain_Spain.png", answer: "スペイン", choices: ["スペイン", "ポルトガル", "イタリア", "メキシコ"], note: "Españaの略。道路脇のガードレールの端が四角い特徴があります。", category: "domain", difficulty_label: "normal" },
-    { tld: ".fr", image: "images/domain/domain_France.png", answer: "フランス", choices: ["フランス", "スペイン", "イタリア", "ベルギー"], note: "Franceの略。青い縁取りのない町名看板が特徴です。", category: "domain", difficulty_label: "normal" },
-    { tld: ".id", image: "images/domain/domain_Indonesia.png", answer: "インドネシア", choices: ["インドネシア", "マレーシア", "フィリピン", "タイ"], note: "Indonesiaの略。電柱に黒と白の縞模様が塗られていることが多いです。", category: "domain", difficulty_label: "normal" },
-    { tld: ".in", image: "images/domain/domain_India.png", answer: "インド", choices: ["インド", "パキスタン", "バングラデシュ", "スリランカ"], note: "Indiaの略。独特な言語の看板と、左側通行が特徴です。", category: "domain", difficulty_label: "normal" },
-    { tld: ".is", image: "images/domain/domain_Iceland.png", answer: "アイスランド", choices: ["アイスランド", "ノルウェー", "アイルランド", "グリーンランド"], note: "Islandの略。木がほとんど生えていない火山岩の風景が特徴です。", category: "domain", difficulty_label: "normal" },
+    // --- ドメインクイズ (domain) ---
+    { tld: ".it", image: "images/domain/domain_Italy.jpg", answer: "イタリア", choices: ["イタリア", "フランス", "スペイン", "ギリシャ"], note: "Italyの略。地中海沿いの街並みが特徴的です。", category: "domain", difficulty_label: "easy" },
+    { tld: ".jp", image: "images/domain/domain_Japan.jpg", answer: "日本", choices: ["日本", "韓国", "台湾", "中国"], note: "Japanの略。道路標識や左側通行が大きなヒントです。", category: "domain", difficulty_label: "easy" },
+    { tld: ".kr", image: "images/domain/domain_SouthKorea.jpg", answer: "韓国", choices: ["韓国", "日本", "中国", "台湾"], note: "Koreaの略。ハングルの看板で見分けがつきます。", category: "domain", difficulty_label: "easy" },
+    { tld: ".mk", image: "images/domain/domain_NorthMacedonia.jpg", answer: "北マケドニア", choices: ["北マケドニア", "ギリシャ", "アルバニア", "ブルガリア"], note: "Macedoniaの略です。", category: "domain", difficulty_label: "hard" },
+    { tld: ".mx", image: "images/domain/domain_Mexico.jpg", answer: "メキシコ", choices: ["メキシコ", "スペイン", "コロンビア", "アメリカ"], note: "Mexicoの略。特有の植生や乾燥した風景が特徴です。", category: "domain", difficulty_label: "normal" },
+    { tld: ".nz", image: "images/domain/domain_NewZealand.jpg", answer: "ニュージーランド", choices: ["ニュージーランド", "オーストラリア", "イギリス", "カナダ"], note: "New Zealandの略。黄色いセンターラインがないことが多いです。", category: "domain", difficulty_label: "normal" },
+    { tld: ".ru", image: "images/domain/domain_Russia.jpg", answer: "ロシア", choices: ["ロシア", "ウクライナ", "ポーランド", "カザフスタン"], note: "Russiaの略。キリル文字の看板が目印です。", category: "domain", difficulty_label: "normal" },
+    { tld: ".sg", image: "images/domain/domain_Singapore.jpg", answer: "シンガポール", choices: ["シンガポール", "マレーシア", "香港", "タイ"], note: "Singaporeの略。非常に整備された都市風景が特徴です。", category: "domain", difficulty_label: "easy" },
+    { tld: ".tw", image: "images/domain/domain_Taiwan.jpg", answer: "台湾", choices: ["台湾", "中国", "日本", "タイ"], note: "Taiwanの略。繁体字の看板とバイクの多さがヒントです。", category: "domain", difficulty_label: "easy" },
+    { tld: ".uk", image: "images/domain/domain_UnitedKingdom.jpg", answer: "イギリス", choices: ["イギリス", "アイルランド", "オーストラリア", "アメリカ"], note: "United Kingdomの略。車のナンバープレート（後部が黄色）が特徴です。", category: "domain", difficulty_label: "normal" },
+    { tld: ".vn", image: "images/domain/domain_Vietnam.jpg", answer: "ベトナム", choices: ["ベトナム", "タイ", "カンボジア", "ラオス"], note: "Vietnamの略。独特の形をした家の造りが特徴です。", category: "domain", difficulty_label: "normal" },
+    { tld: ".za", image: "images/domain/domain_SouthAfrica.jpg", answer: "南アフリカ", choices: ["南アフリカ", "イギリス", "オーストラリア", "ナイジェリア"], note: "Zuid-Afrika（オランダ語由来）の略。外側が白い道路の区画線が特徴です。", category: "domain", difficulty_label: "normal" },
+    { tld: ".ar", image: "images/domain/domain_Argentina.jpg", answer: "アルゼンチン", choices: ["アルゼンチン", "チリ", "ウルグアイ", "スペイン"], note: "Argentinaの略。標識の裏が黒いことが多いです。", category: "domain", difficulty_label: "normal" },
+    { tld: ".au", image: "images/domain/domain_Australia.jpg", answer: "オーストラリア", choices: ["オーストラリア", "ニュージーランド", "南アフリカ", "アメリカ"], note: "Australiaの略。非常に長い直線道路やユーカリの木が特徴です。", category: "domain", difficulty_label: "normal" },
+    { tld: ".be", image: "images/domain/domain_Belgium.jpg", answer: "ベルギー", choices: ["ベルギー", "フランス", "オランダ", "ドイツ"], note: "Belgiumの略。街灯の形が独特なことが多いです。", category: "domain", difficulty_label: "normal" },
+    { tld: ".br", image: "images/domain/domain_Brazil.jpg", answer: "ブラジル", choices: ["ブラジル", "ポルトガル", "アルゼンチン", "コロンビア"], note: "Brazilの略。標識の裏が黒く、背面に「×」の補強があることが特徴です。", category: "domain", difficulty_label: "normal" },
+    { tld: ".ca", image: "images/domain/domain_Canada.jpg", answer: "カナダ", choices: ["カナダ", "アメリカ", "イギリス", "フランス"], note: "Canadaの略。アメリカに似ていますが、速度制限がkm/h表記です。", category: "domain", difficulty_label: "normal" },
+    { tld: ".ch", image: "images/domain/domain_Switzerland.jpg", answer: "スイス", choices: ["スイス", "ドイツ", "オーストリア", "イタリア"], note: "Confoederatio Helvetica（ラテン語）の略。低い位置にある標識が特徴です。", category: "domain", difficulty_label: "normal" },
+    { tld: ".co", image: "images/domain/domain_Colombia.jpg", answer: "コロンビア", choices: ["コロンビア", "ベネズエラ", "メキシコ", "エクアドル"], note: "Colombiaの略。黄色いナンバープレートが大きな目印になります。", category: "domain", difficulty_label: "normal" },
+    { tld: ".de", image: "images/domain/domain_Germany.jpg", answer: "ドイツ", choices: ["ドイツ", "オーストリア", "スイス", "オランダ"], note: "Deutschlandの略。プライバシー保護のため、一部地域以外はぼかしが多いです。", category: "domain", difficulty_label: "normal" },
+    { tld: ".es", image: "images/domain/domain_Spain.jpg", answer: "スペイン", choices: ["スペイン", "ポルトガル", "イタリア", "メキシコ"], note: "Españaの略。道路脇のガードレールの端が四角い特徴があります。", category: "domain", difficulty_label: "normal" },
+    { tld: ".fr", image: "images/domain/domain_France.jpg", answer: "フランス", choices: ["フランス", "スペイン", "イタリア", "ベルギー"], note: "Franceの略。青い縁取りのない町名看板が特徴です。", category: "domain", difficulty_label: "normal" },
+    { tld: ".id", image: "images/domain/domain_Indonesia.jpg", answer: "インドネシア", choices: ["インドネシア", "マレーシア", "フィリピン", "タイ"], note: "Indonesiaの略。電柱に黒 and 白の縞模様が塗られていることが多いです。", category: "domain", difficulty_label: "normal" },
+    { tld: ".in", image: "images/domain/domain_India.jpg", answer: "インド", choices: ["インド", "パキスタン", "バングラデシュ", "スリランカ"], note: "Indiaの略。独特な言語の看板と、左側通行が特徴です。", category: "domain", difficulty_label: "normal" },
+    { tld: ".is", image: "images/domain/domain_Iceland.jpg", answer: "アイスランド", choices: ["アイスランド", "ノルウェー", "アイルランド", "グリーンランド"], note: "Islandの略。木がほとんど生えていない火山岩の風景が特徴です。", category: "domain", difficulty_label: "normal" },
 
 
     // --- 文字クイズ (30問) ---
-    {
-        image: "images/text_korea.jpg",
-        answer: "韓国",
-        choices: ["韓国", "日本", "中国", "台湾"],
-        note: "丸（○）や直線（ー）の組み合わせが特徴的な**ハングル**です。",
-        category: "text",
-        difficulty_label: "easy"
-    },
-    {
-        image: "images/text_japan_katakana.jpg",
-        answer: "日本",
-        choices: ["日本", "韓国", "中国", "ベトナム"],
-        note: "カタカナやひらがなが混ざっていれば**日本**です。",
-        category: "text",
-        difficulty_label: "easy"
-    },
-    {
-        image: "images/text_russia.jpg",
-        answer: "ロシア",
-        choices: ["ロシア", "ギリシャ", "ブルガリア", "ウクライナ"],
-        note: "Д, П, Щといった**キリル文字**です。ロシアは「ы」という文字が使われるのが特徴です。",
-        category: "text",
-        difficulty_label: "normal"
-    },
-    {
-        image: "images/text_israel.jpg",
-        answer: "イスラエル",
-        choices: ["イスラエル", "ギリシャ", "エジプト", "ヨルダン"],
-        note: "四角いフォルムの**ヘブライ文字**です。右から左へ読みます。",
-        category: "text",
-        difficulty_label: "normal"
-    },
-    {
-        image: "images/text_cambodia.jpg",
-        answer: "カンボジア",
-        choices: ["カンボジア", "タイ", "ラオス", "ミャンマー"],
-        note: "タイ文字に似ていますが、より複雑で「ひげ」のような装飾が多いのが**クメール文字**です。",
-        category: "text",
-        difficulty_label: "hard"
-    },
-    {
-        image: "images/text_greece.jpg",
-        answer: "ギリシャ",
-        choices: ["ギリシャ", "ロシア", "ブルガリア", "キプロス"],
-        note: "ΣやΩといった独特の文字があれば**ギリシャ**です。",
-        category: "text",
-        difficulty_label: "normal"
-    },
-    {
-        image: "images/text_china.jpg",
-        answer: "中国",
-        choices: ["中国", "日本", "韓国", "台湾"],
-        note: "簡略化された漢字（**簡体字**）が使われています。",
-        category: "text",
-        difficulty_label: "easy"
-    },
-    {
-        image: "images/text_usa.jpg",
-        answer: "アメリカ",
-        choices: ["アメリカ", "イギリス", "カナダ", "オーストラリア"],
-        note: "英語ですが、看板の雰囲気が典型的なアメリカスタイルです。",
-        category: "text",
-        difficulty_label: "easy"
-    },
-    {
-        image: "images/text_thailand.jpg",
-        answer: "タイ",
-        choices: ["タイ", "ラオス", "カンボジア", "ミャンマー"],
-        note: "丸っこいフォントで、上部に小さな丸（ループ）があるのが**タイ文字**の特徴です。",
-        category: "text",
-        difficulty_label: "normal"
-    },
-    {
-        image: "images/text_saudi_arabia.jpg",
-        answer: "サウジアラビア",
-        choices: ["サウジアラビア", "エジプト", "イラン", "パキスタン"],
-        note: "右から左に読む**アラビア文字**です。",
-        category: "text",
-        difficulty_label: "normal"
-    },
-    {
-        image: "images/text_bhutan.jpg",
-        answer: "ブータン",
-        choices: ["ブータン", "ネパール", "インド", "チベット"],
-        note: "横棒から文字がぶら下がっているような形が**ゾンカ文字**です。",
-        category: "text",
-        difficulty_label: "hard"
-    },
-    {
-        image: "images/text_ethiopia.jpg",
-        answer: "エチオピア",
-        choices: ["エチオピア", "ケニア", "タンザニア", "ウガンダ"],
-        note: "独特な曲線と点、そして「目」のような形が特徴の**ゲエズ文字**です。",
-        category: "text",
-        difficulty_label: "hard"
-    },
-    {
-        image: "images/text_vietnam.jpg",
-        answer: "ベトナム",
-        choices: ["ベトナム", "中国", "タイ", "カンボジア"],
-        note: "アルファベットに独特な声調記号が付くのが**クオック・グー**の特徴です。",
-        category: "text",
-        difficulty_label: "easy"
-    },
-    {
-        image: "images/text_germany.jpg",
-        answer: "ドイツ",
-        choices: ["ドイツ", "オーストリア", "スイス", "オランダ"],
-        note: "アルファベットですが、「**ß**」や「Ä, Ö, Ü」があればドイツ語圏の可能性が高いです。",
-        category: "text",
-        difficulty_label: "easy"
-    },
-    {
-        image: "images/text_taiwan.jpg",
-        answer: "台湾",
-        choices: ["台湾", "中国", "日本", "韓国"],
-        note: "簡略化されていない**繁体字**（正体字）が使われています。",
-        category: "text",
-        difficulty_label: "normal"
-    },
-    {
-        image: "images/text_france.jpg",
-        answer: "フランス",
-        choices: ["フランス", "イギリス", "ドイツ", "イタリア"],
-        note: "フランス語特有のアクサン（◌́ ◌̀ ◌̂）や「ç」が使われます。",
-        category: "text",
-        difficulty_label: "easy"
-    },
+    { id: "text_hangul_Korea_01", image: "images/text/text_hangul_Korea_01.jpg", answer: "韓国", choices: ["韓国", "日本", "中国", "台湾"], note: "丸（○）や直線（ー）の組み合わせが特徴的な**ハングル**です。漢字が混じらず、この独特の形状だけで構成されていれば韓国の可能性が非常に高いです。", category: "text", difficulty_label: "easy" },
+    { id: "text_thai_Thailand_01", image: "images/text/text_thai_Thailand_01.jpg", answer: "タイ", choices: ["タイ", "ラオス", "カンボジア", "ミャンマー"], note: "文字の端々に小さな丸（ループ）があり、曲線主体なのが**タイ文字**の特徴です。似ているラオス文字よりも、少し角ばった印象を受けるものが多いです。", category: "text", difficulty_label: "easy" },
+    { id: "text_greek_Greece_01", image: "images/text/text_greek_Greece_01.jpg", answer: "ギリシャ", choices: ["ギリシャ", "ロシア", "キプロス", "ブルガリア"], note: "数学の記号で使われる「Σ」「Ω」「Δ」などが看板に見られたら**ギリシャ文字**です。キリル文字と似ていますが、ギリシャ独自の形に注目しましょう。", category: "text", difficulty_label: "normal" },
+    { id: "text_latin_Vietnam_01", image: "images/text/text_latin_Vietnam_01.jpg", answer: "ベトナム", choices: ["ベトナム", "タイ", "フィリピン", "インドネシア"], note: "ラテン文字（アルファベット）を使用しますが、**母音の上下に多くの声調記号（アクセントマーク）**がつくのがベトナム語の最大の特徴です。", category: "text", difficulty_label: "normal" },
+    { id: "text_latin_Poland_01", image: "images/text/text_latin_Poland_01.jpg", answer: "ポーランド", choices: ["ポーランド", "チェコ", "ハンガリー", "リトアニア"], note: "Lに斜線が入った**「ł」**は、ポーランド語を特定する決定的なヒントになります。他にもzの上に点がある「ż」などもポーランド特有です。", category: "text", difficulty_label: "normal" },
+    { id: "text_latin_Iceland_01", image: "images/text/text_latin_Iceland_01.jpg", answer: "アイスランド", choices: ["アイスランド", "ノルウェー", "デンマーク", "フィンランド"], note: "北欧諸国の中でも、**「ð」や「þ」**といった特殊な文字が含まれていればアイスランドで確定です。これらは他の北欧言語には登場しません。", category: "text", difficulty_label: "hard" },
+    { id: "text_cyrillic_Ukraine_01", image: "images/text/text_cyrillic_Ukraine_01.jpg", answer: "ウクライナ", choices: ["ロシア", "ウクライナ", "ブルガリア", "モンゴル"], note: "キリル文字の中に、ラテン文字のような**「і」や「ї」**（点付きのi）が混じっていればウクライナです。ロシア語にはこの形の文字はありません。", category: "text", difficulty_label: "hard" },
+    { id: "text_latin_Brazil_01", image: "images/text/text_latin_Brazil_01.jpg", answer: "ブラジル", choices: ["ブラジル", "メキシコ", "コロンビア", "スペイン"], note: "南米のスペイン語圏と違いポルトガル語を使います。看板に**「ão」**という綴りがあったり、通りの名が「Rua」で始まっていればブラジルです。", category: "text", difficulty_label: "hard" },
+    { id: "text_latin_Indonesia_01", image: "images/text/text_latin_Indonesia_01.jpg", answer: "インドネシア", choices: ["インドネシア", "マレーシア", "フィリピン", "ベトナム"], note: "マレーシアと非常に似ていますが、広告や看板にトップレベルドメインの**「.id」**が見えたらインドネシアと確定できます。", category: "text", difficulty_label: "hard" },
+    { id: "text_georgian_Georgia_01", image: "images/text/text_georgian_Georgia_01.jpg", answer: "ジョージア", choices: ["ジョージア", "アルメニア", "ギリシャ", "エチオピア"], note: "スパゲッティのように丸まった、非常に独特な形状の**ジョージア文字**です。他に似た文字がほとんどないため、形を覚えれば即座に判定可能です。", category: "text", difficulty_label: "normal" },
+    { id: "text_latin_Romania_01", image: "images/text/text_latin_Romania_01.jpg", answer: "ルーマニア", choices: ["ルーマニア", "イタリア", "ハンガリー", "トルコ"], note: "ラテン文字を使用していますが、『ț』や『ș』といった文字の下にコンマのような記号が付くのがルーマニア語の特徴です。", category: "text", difficulty_label: "normal" },
+    { id: "text_latin_Sweden_01", image: "images/text/text_latin_Sweden_01.jpg", answer: "スウェーデン", choices: ["スウェーデン", "アイスランド", "オランダ", "エストニア"], note: "ラテン文字に加え、『å』『ä』『ö』といった北欧特有の記号が付いた文字が看板に見られます。", category: "text", difficulty_label: "easy" },
+    { id: "text_latin_Turkey_01", image: "images/text/text_latin_Turkey_01.jpg", answer: "トルコ", choices: ["トルコ", "アゼルバイジャン", "ブルガリア", "ギリシャ"], note: "点のない『ı』や、記号付きの『ğ』『ş』『ç』が特徴。これらが看板にあればトルコの可能性が非常に高いです。", category: "text", difficulty_label: "normal" },
+    { id: "text_cyrillic_Bulgaria_01", image: "images/text/text_cyrillic_Bulgaria_01.jpg", answer: "ブルガリア", choices: ["ブルガリア", "ロシア", "北マケドニア", "セルビア"], note: "キリル文字を使用。ブルガリア語は『ъ』（硬音記号）を多用するため、看板の中にこの文字を探すのがポイントです。", category: "text", difficulty_label: "hard" },
+    { id: "text_cyrillic_Serbia_01", image: "images/text/text_cyrillic_Serbia_01.jpg", answer: "セルビア", choices: ["セルビア", "ブルガリア", "モンテネグロ", "ギリシャ"], note: "キリル文字ですが、セルビア語特有の『ђ』や『љ』『њ』といった独自の字形が含まれるのが識別点です。", category: "text", difficulty_label: "hard" },
+    { id: "text_khmer_Cambodia_01", image: "images/text/text_khmer_Cambodia_01.jpg", answer: "カンボジア", choices: ["カンボジア", "タイ", "ラオス", "ミャンマー"], note: "クメール文字は、タイ文字よりも曲線が複雑で、文字の上部に装飾的な飾りが付いているものが多いのが特徴です。", category: "text", difficulty_label: "hard" },
+    { id: "text_lao_Laos_01", image: "images/text/text_lao_Laos_01.jpg", answer: "ラオス", choices: ["ラオス", "タイ", "カンボジア", "ベトナム"], note: "タイ文字に非常に似ていますが、タイ文字よりも全体的に丸っこく、角が取れたような形をしています。", category: "text", difficulty_label: "hard" },
+    { id: "text_dzongkha_Bhutan_01", image: "images/text/text_dzongkha_Bhutan_01.jpg", answer: "ブータン", choices: ["ブータン", "ネパール", "インド", "チベット"], note: "ゾンカ文字です。文字の上部に水平な直線（頭線）があり、そこから文字がぶら下がっているような形をしています。", category: "text", difficulty_label: "hard" },
+    { id: "text_georgian_Georgia_01", image: "images/text/text_georgian_Georgia_01.jpg", answer: "ジョージア", choices: ["ジョージア", "アルメニア", "ギリシャ", "タイ"], note: "スパゲッティのように丸まった、曲線主体の独特な形状を持つジョージア文字（ムヘドルリ）が特徴です。", category: "text", difficulty_label: "normal" },
+    { id: "text_armenian_Armenia_01", image: "images/text/text_armenian_Armenia_01.jpg", answer: "アルメニア", choices: ["アルメニア", "ジョージア", "エチオピア", "ギリシャ"], note: "ジョージア文字に似ていますが、ジョージア文字よりも直線的で角ばった字形がアルメニア文字の特徴です。", category: "text", difficulty_label: "hard" },
+    { id: "text_burmese_Myanmar_01", image: "images/text/text_burmese_Myanmar_01.jpg", answer: "ミャンマー", choices: ["ミャンマー", "タイ", "ラオス", "カンボジア"], note: "円形や半円の組み合わせで構成される非常に丸っこいビルマ文字が最大の特徴です。", category: "text", difficulty_label: "normal" },
+    { id: "text_amharic_Ethiopia_01", image: "images/text/text_amharic_Ethiopia_01.jpg", answer: "エチオピア", choices: ["エチオピア", "イスラエル", "アルメニア", "タイ"], note: "縦棒や点、小さな丸を組み合わせたような独特の形状を持つゲエズ文字（アムハラ文字）です。", category: "text", difficulty_label: "hard" },
+    { id: "text_latin_Denmark_01", image: "images/text/text_latin_Denmark_01.jpg", answer: "デンマーク", choices: ["デンマーク", "スウェーデン", "フィンランド", "オランダ"], note: "『ø』や『æ』といった文字が含まれていれば、デンマークかノルウェーの可能性が非常に高いです。", category: "text", difficulty_label: "normal" },
+    { id: "text_latin_Estonia_01", image: "images/text/text_latin_Estonia_01.jpg", answer: "エストニア", choices: ["エストニア", "フィンランド", "ラトビア", "リトアニア"], note: "フィンランド語に非常に似ていますが、波打つ記号が付いた『õ』があればエストニア確定です。", category: "text", difficulty_label: "hard" },
+    { id: "text_hindi_India_01", image: "images/text/text_hindi_India_01.jpg", answer: "インド", choices: ["インド", "ネパール", "バングラデシュ", "タイ"], note: "文字の上部に一本の長い横棒（シロレーカー）が通っているのがヒンディー語の特徴です。", category: "text", difficulty_label: "easy" },
+    { id: "text_arabic_UAE_01", image: "images/text/text_arabic_UAE_01.jpg", answer: "アラブ首長国連邦", choices: ["アラブ首長国連邦", "サウジアラビア", "ヨルダン", "エジプト"], note: "アラビア文字に加え、豪華な近代建築や高層ビルが並ぶ都市景観が特徴です。", category: "text", difficulty_label: "normal" },
+    { id: "text_meta_Austria_01", image: "images/text/text_meta_Austria_01.jpg", answer: "オーストリア", choices: ["オーストリア", "ドイツ", "スイス", "ベルギー"], note: "ドイツ語（ラテン文字）の看板ですが、末尾に『.at』ドメインがあれば、オーストリアであると確定できます。", category: "text", difficulty_label: "hard" },
+    { id: "text_meta_SouthAfrica_01", image: "images/text/text_meta_SouthAfrica_01.jpg", answer: "南アフリカ", choices: ["南アフリカ", "オーストラリア", "イギリス", "ケニア"], note: "英語の看板が並びますが、ドメインの『.za』は南アフリカ固有のメタ情報です。", category: "text", difficulty_label: "normal" },
+    { id: "text_meta_France_01", image: "images/text/text_meta_France_01.jpg", answer: "フランス", choices: ["フランス", "カナダ", "ベルギー", "イタリア"], note: "フランスの都市部でよく見られる、建物の角に取り付けられた青い住所看板です。『Rue（通り）』という表記が特徴です。", category: "text", difficulty_label: "easy" },
+    { id: "text_meta_Mexico_01", image: "images/text/text_meta_Mexico_01.jpg", answer: "メキシコ", choices: ["メキシコ", "スペイン", "コロンビア", "アルゼンチン"], note: "スペイン語の『Calle（通り）』という表記に加え、メキシコ特有の白地に黒文字、あるいは街区番号（Colonia）が記載された看板が特徴です。", category: "text", difficulty_label: "normal" },
 
-    {
-        image: "images/text_italy.jpg",
-        answer: "イタリア",
-        choices: ["イタリア", "フランス", "スペイン", "ポルトガル"],
-        note: "イタリア語特有のアクセント記号（à, è, ì, ò, ù）が使われます。",
-        category: "text",
-        difficulty_label: "easy"
-    },
-    {
-        image: "images/text_canada.jpg",
-        answer: "カナダ",
-        choices: ["カナダ", "アメリカ", "イギリス", "オーストラリア"],
-        note: "英語とフランス語の両方が使われるのが特徴です。",
-        category: "text",
-        difficulty_label: "easy"
-    },
-    {
-        image: "images/text_poland.jpg",
-        answer: "ポーランド",
-        choices: ["ポーランド", "チェコ", "ハンガリー", "ルーマニア"],
-        note: "アルファベットに「ą」「ę」「ł」などの独特な記号が付きます。",
-        category: "text",
-        difficulty_label: "normal"
-    },
-    {
-        image: "images/text_indonesia.jpg",
-        answer: "インドネシア",
-        choices: ["インドネシア", "マレーシア", "フィリピン", "ベトナム"],
-        note: "アルファベットですが、典型的な東南アジアスタイルの看板です。",
-        category: "text",
-        difficulty_label: "normal"
-    },
-    {
-        image: "images/text_laos.jpg",
-        answer: "ラオス",
-        choices: ["ラオス", "タイ", "カンボジア", "ミャンマー"],
-        note: "タイ文字に似ていますが、より丸みがあるのが**ラオス文字**の特徴です。",
-        category: "text",
-        difficulty_label: "hard"
-    },
-    {
-        image: "images/text_nepal.jpg",
-        answer: "ネパール",
-        choices: ["ネパール", "インド", "ブータン", "チベット"],
-        note: "ゾンカ文字よりも角ばっているのが**ネパール文字**の特徴です。",
-        category: "text",
-        difficulty_label: "hard"
-    },
-    {
-    image: "images/text_spain.jpg",
-    answer: "スペイン",
-    choices: ["スペイン", "メキシコ", "イタリア", "フランス"],
-    note: "「ñ」という文字や、文頭に付く逆さまの感嘆符（¡）がスペイン語の大きな特徴です。",
-    category: "text",
-    difficulty_label: "easy"
-},
-{
-    image: "images/text_turkey.jpg",
-    answer: "トルコ",
-    choices: ["トルコ", "アゼルバイジャン", "ハンガリー", "ギリシャ"],
-    note: "アルファベットですが、「I」の点がない「ı」や、下にひげの付いた「ş」「ç」があるのがトルコ語の特徴です。",
-    category: "text",
-    difficulty_label: "normal"
-},
-{
-    image: "images/text_denmark.jpg",
-    answer: "デンマーク",
-    choices: ["デンマーク", "スウェーデン", "ドイツ", "オランダ"],
-    note: "アルファベットですが、Oに斜線の入った「ø」や、AとEが合体した「æ」は北欧（特にデンマークとノルウェー）に特有の文字です。",
-    category: "text",
-    difficulty_label: "normal"
-},
-{
-    image: "images/text_georgia.jpg",
-    answer: "ジョージア",
-    choices: ["ジョージア", "アルメニア", "ギリシャ", "ロシア"],
-    note: "世界でもジョージアでしか使われていない、独自の丸まった「**ジョージア文字**」です。",
-    category: "text",
-    difficulty_label: "hard"
-},
-    
-{
-    image: "images/text_srilanka.jpg",
-    answer: "スリランカ",
-    choices: ["スリランカ", "インド", "ミャンマー", "タイ"],
-    note: "非常に丸っこい、独自の曲線を持つ「**シンハラ文字**」です。スリランカの公用語の一つです。",
-    category: "text",
-    difficulty_label: "hard"
-}
-,
-{
-    image: "images/text_armenia.jpg",
-    answer: "アルメニア",
-    choices: ["アルメニア", "ジョージア", "ロシア", "ギリシャ"],
-    note: "世界でもアルメニアでしか使われていない、独自の丸みを帯びつつも角張った「**アルメニア文字**」です。",
-    category: "text",
-    difficulty_label: "hard"
-}
-,
 
-   
-  // --- 標識：横断歩道 (sign-crossing) 完全修正版 ---
+    // --- 標識：横断歩道 (sign-crossing) 完全修正版 ---
     { image: "images/sign/crossing/sign_crossing_Ireland.jpg", answer: "アイルランド", choices: ["アイルランド", "イギリス", "フランス", "アイスランド"], note: "", category: "sign-crossing", difficulty_label: "normal" },
     { image: "images/sign/crossing/sign_crossing_Israel.jpg", answer: "イスラエル", choices: ["イスラエル", "ヨルダン", "ギリシャ", "エジプト"], note: "", category: "sign-crossing", difficulty_label: "normal" },
     { image: "images/sign/crossing/sign_crossing_Italy.jpg", answer: "イタリア", choices: ["イタリア", "フランス", "スペイン", "ギリシャ"], note: "", category: "sign-crossing", difficulty_label: "normal" },
