@@ -58,6 +58,17 @@ const quizData = [
     { id: "text_meta_SouthAfrica_01", image: "images/text/text_meta_SouthAfrica_01.jpg", answer: "南アフリカ", choices: ["南アフリカ", "オーストラリア", "イギリス", "ケニア"], note: "英語の看板が並びますが、ドメインの『.za』は南アフリカ固有のメタ情報です。", category: "text", difficulty_label: "normal" },
     { id: "text_meta_France_01", image: "images/text/text_meta_France_01.jpg", answer: "フランス", choices: ["フランス", "カナダ", "ベルギー", "イタリア"], note: "フランスの都市部でよく見られる、建物の角に取り付けられた青い住所看板です。『Rue（通り）』という表記が特徴です。", category: "text", difficulty_label: "easy" },
     { id: "text_meta_Mexico_01", image: "images/text/text_meta_Mexico_01.jpg", answer: "メキシコ", choices: ["メキシコ", "スペイン", "コロンビア", "アルゼンチン"], note: "スペイン語の『Calle（通り）』という表記に加え、メキシコ特有の白地に黒文字、あるいは街区番号（Colonia）が記載された看板が特徴です。", category: "text", difficulty_label: "normal" },
+    // --- 今日の生成分（9カ国） ---
+
+    { id: "text_cyrillic_Russia_01", image: "images/text/text_cyrillic_Russia_01.jpg", answer: "ロシア", choices: ["ロシア", "ウクライナ", "ベラルーシ", "ブルガリア"], note: "最も一般的なキリル文字ですが、ウクライナ語の **Ї** やベラルーシ語の **ў** など、他国特有の文字が含まれないことで区別します。", category: "text", difficulty_label: "easy" },
+    { id: "text_cyrillic_Belarus_01", image: "images/text/text_cyrillic_Belarus_01.jpg", answer: "ベラルーシ", choices: ["ベラルーシ", "ロシア", "ウクライナ", "ポーランド"], note: "キリル文字ですが、ロシア語にはない **і**（点1つのi）と、ベラルーシ語独自の **ў**（フック付きのu）が特徴です。", category: "text", difficulty_label: "medium" },
+    { id: "text_sinhala_SriLanka_01", image: "images/text/text_sinhala_SriLanka_01.jpg", answer: "スリランカ", choices: ["スリランカ", "インド", "バングラデシュ", "ミャンマー"], note: "非常に特徴的な、丸みを帯びた曲線で構成される **シンハラ文字** です。タミル文字や英語と併記されることが多いです。", category: "text", difficulty_label: "easy" },
+    { id: "text_bengali_Bangladesh_01", image: "images/text/text_bengali_Bangladesh_01.jpg", answer: "バングラデシュ", choices: ["バングラデシュ", "インド", "パキスタン", "ネパール"], note: "文字の上部に **マトラ** と呼ばれる横線が一本につながる **ベンガル文字** です。インドのヒンディー語と似ていますが、文字の形状がより複雑です。", category: "text", difficulty_label: "easy" },
+    { id: "text_latin_Slovakia_01", image: "images/text/text_latin_Slovakia_01.jpg", answer: "スロバキア", choices: ["スロバキア", "チェコ", "ポーランド", "ハンガリー"], note: "チェコ語と非常に似ていますが、スロバキア語独自の **ô** や、長い子音を表す **ĺ**, **ŕ** などがあります。", category: "text", difficulty_label: "hard" },
+    { id: "text_latin_Lithuania_01", image: "images/text/text_latin_Lithuania_01.jpg", answer: "リトアニア", choices: ["リトアニア", "ラトビア", "エストニア", "ポーランド"], note: "ラトビアと似ていますが、リトアニア語には **ė**（点付きのe）や、母音の下にフックが付く **ą**, **ę**, **į**, **ų**（オゴネク）があります。", category: "text", difficulty_label: "medium" },
+    { id: "text_latin_Latvia_01", image: "images/text/text_latin_Latvia_01.jpg", answer: "ラトビア", choices: ["ラトビア", "リトアニア", "エストニア", "ポーランド"], note: "母音の上に横棒（**Ā**, **Ē**, **Ī**, **Ū**）や、子音の下にフック（**Ģ**, **Ķ**, **Ļ**, **Ņ**）が付くのが特徴です。", category: "text", difficulty_label: "medium" },
+    { id: "text_latin_Finland_01", image: "images/text/text_latin_Finland_01.jpg", answer: "フィンランド", choices: ["フィンランド", "スウェーデン", "ノルウェー", "エストニア"], note: "ラテン文字ですが、**Ä** や **Ö**（ウムラウト）が非常に多く、また **kk** や **pp** のように同じ子音が続くのが大きな特徴です。", category: "text", difficulty_label: "easy" },
+    { id: "text_cyrillic_Ukraine_01", image: "images/text/text_cyrillic_Ukraine_01.jpg", answer: "ウクライナ", choices: ["ウクライナ", "ロシア", "ベラルーシ", "ブルガリア"], note: "キリル文字ですが、ロシア語にはない **Ї**（点2つのi）が特徴です。また **і**（点1つのi）もウクライナ語で使用されます。", category: "text", difficulty_label: "easy" },
 
 
     // --- 標識：横断歩道 (sign-crossing) 完全修正版 ---
